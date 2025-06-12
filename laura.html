@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pra Você 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      background-color: #1f1f1f;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      overflow-x: hidden;
+      position: relative;
+      height: 100vh;
+    }
+
+    .centered {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      z-index: 10; /* fica acima dos corações */
+    }
+
+    .open-btn {
+      padding: 15px 30px;
+      background: #ff4d4d;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-size: 1.2em;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 77, 77, 0.5);
+      transition: 0.3s;
+    }
+
+    .open-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .content {
+      display: none;
+      padding: 40px 20px;
+      animation: fadeIn 1s ease forwards;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    p {
+      font-size: 1.1em;
+      line-height: 1.6em;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: #ffb6c1;
+    }
+
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 20px;
+      padding: 20px 0;
+      margin: 30px auto 5px auto; /* menos margem embaixo para data ficar perto */
+      width: 100%;
+      max-width: 800px;
+      align-items: center;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel img {
+      scroll-snap-align: center;
+      flex-shrink: 0;
+      width: 80%;
+      max-width: 300px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      transition: transform 0.5s ease;
+      cursor: pointer;
+    }
+
+    .carousel img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(255, 77, 77, 0.8);
+    }
+
+    .date-info {
+      color: #ffb6c1;
+      font-size: 0.9em;
+      font-style: italic;
+      margin-bottom: 30px;
+    }
+
+    /* Player Spotify */
+    .spotify-player-container {
+      max-width: 400px;
+      margin: 30px auto;
+      box-shadow: 0 0 40px rgba(255, 77, 77, 0.7);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+      position: relative;
+      z-index: 10;
+    }
+    .spotify-player-container:hover {
+      box-shadow: 0 0 60px rgba(255, 77, 77, 1);
+    }
+
+    iframe.spotify-player {
+      border-radius: 12px;
+      width: 100%;
+      height: 152px;
+      border: none;
+      display: block;
+    }
+
+    /* Fundo com corações flutuantes descendo */
+    .hearts {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 16px;
+      color: #ff4d4d;
+      opacity: 0.7;
+      user-select: none;
+      animation-timing-function: linear;
+      will-change: transform, opacity;
+      filter: drop-shadow(0 0 2px #ff4d4d);
+    }
+
+    /* Animação: desce, gira e some */
+    @keyframes floatDown {
+      0% {
+        transform: translateY(-20vh) rotate(0deg);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .carousel img {
+        width: 90%;
+        height: auto;
+      }
+      .spotify-player-container {
+        max-width: 90%;
+        margin: 20px auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="centered" id="start">
+    <h1>Tenho uma surpresa pra você ❤️</h1>
+    <button class="open-btn" onclick="abrirCartinha()">Clique para abrir</button>
+  </div>
+
+  <div class="content" id="conteudo">
+    <h1>Feliz Dia dos Namorados, minha princesa ❤️</h1>
+
+    <p>
+      A gente se conhece há um bom tempo, mas de uns tempos pra cá, algo mudou. Comecei a sentir uma atração diferente por você — pelo seu jeito, pela sua essência, pelo que você é. E mesmo que parecesse inesperado, tudo começou a fazer sentido, como se fosse pra ser assim.
+    </p>
+    <p>
+      Pode parecer exagero, mas você se tornou especial pra mim. Desde o dia <strong>07 de março de 2025</strong>, quando demos nosso primeiro beijo, até hoje, cada momento ao seu lado tem sido único. Amo o jeito que você me trata, o seu abraço, seu beijo, seu cheiro, seu sorriso... Você me encanta por completo.
+    </p>
+    <p>
+      Seu jeito sério às vezes me deixa até sem reação, mas ao mesmo tempo, é isso que te faz tão única. Eu admiro tudo em você. Uma morena linda, baixinha, de cabelos cacheados — e com um coração gigante.
+    </p>
+    <p>
+      A gente ainda tá no começo, é verdade, mas já passamos da fase de "conhecer". Já estou conhecendo sua família, e aos poucos, tudo tem se encaixado. Quando Deus permitir, virá o momento do pedido, o momento de tornar isso tudo ainda mais sério.
+    </p>
+    <p>
+      Hoje, só quero que saiba: você é uma garota surreal. Espetacular. Eu te admiro demais, e prometo cuidar de você, te fazer feliz e viver tudo o que a vida tiver pra nos oferecer — juntos.
+    </p>
+
+    <div class="carousel">
+      <img src="https://i.postimg.cc/ZnqFvkjc/file-00000000aff45230a123ac3051707198-conversation-id-67e9ebdb-a23c-8006-a707-5389b22d8b00-message-i.png" alt="Foto 1">
+      <img src="https://i.postimg.cc/TYpJR6K2/IMG-20250403-WA0133-Original.jpg" alt="Foto 2">
+      <img src="https://i.postimg.cc/PJFbm6Rk/IMG-0010.jpg" alt="Foto 3">
+      <img src="https://i.postimg.cc/SQZGFsNt/IMG-0136.jpg" alt="Foto 4">
+      <img src="https://i.postimg.cc/rmjNpyGs/IMG-0387.jpg" alt="Foto 5">
+      <img src="https://i.postimg.cc/TYFq14bV/IMG-0965.jpg" alt="Foto 6">
+    </div>
+
+    <div class="date-info">(desde 07 de março de 2025 às 14:13)</div>
+
+    <!-- Player do Spotify fora do carrossel -->
+    <div class="spotify-player-container">
+      <iframe
+        class="spotify-player"
+        src="https://open.spotify.com/embed/track/6nZeofv0KpFjFD1rCq3xUH?utm_source=generator"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      ></iframe>
+    </div>
+  </div>
+
+  <div class="hearts" id="hearts"></div>
+
+  <script>
+    function abrirCartinha() {
+      const startDiv = document.getElementById("start");
+      const conteudoDiv = document.getElementById("conteudo");
+
+      let opacity = 1;
+      const fadeOut = setInterval(() => {
+        if (opacity <= 0) {
+          clearInterval(fadeOut);
+          startDiv.style.display = "none";
+          conteudoDiv.style.display = "block";
+          conteudoDiv.style.opacity = 0;
+          let op = 0;
+          const fadeIn = setInterval(() => {
+            if (op >= 1) {
+              clearInterval(fadeIn);
+            }
+            conteudoDiv.style.opacity = op;
+            op += 0.05;
+          }, 30);
+        } else {
+          opacity -= 0.05;
+          startDiv.style.opacity = opacity;
+        }
+      }, 30);
+    }
+
+    // Função para criar corações que descem
+    function criarCoracao() {
+      const heartsContainer = document.getElementById('hearts');
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '❤️';
+
+      // Posiciona o coração em local aleatório horizontalmente
+      heart.style.left = Math.random() * 100 + 'vw';
+
+      // Tamanho aleatório entre 12px e 30px
+      const size = Math.random() * 18 + 12;
+      heart.style.fontSize = size + 'px';
+
+      // Duração aleatória da animação entre 5s e 12s
+      const duration = Math.random() * 7 + 5;
+
+      heart.style.animation = `floatDown ${duration}s linear forwards`;
+
+      // Delay para animação começar em momentos diferentes
+      heart.style.animationDelay = '0s';
+
+      heartsContainer.appendChild(heart);
+
+      // Remove o coração após a animação acabar
+      setTimeout(() => {
+        heart.remove();
+      }, duration * 1000);
+    }
+
+    // Cria vários corações periodicamente
+    setInterval(criarCoracao, 400);
+  </script>
+</body>
+</html>
